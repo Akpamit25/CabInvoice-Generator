@@ -7,16 +7,13 @@ public class CabInvoice {
 
 	public double calculateFare(double distance, double time) {
 		double fare = distance * COST_PER_KM + time * COST_PER_MIN;
-		if (fare < COST_MIN)
-			return COST_MIN;
-		return fare;
+		return Math.max(fare, COST_MIN);
 	}
 
-	public double calculateFare(Ride[] ride) {
+	public InvoiceSummary calculateFare(Ride[] ride) {
 		double totalFare = 0;
 		for (Ride rides : ride)
 			totalFare += this.calculateFare(rides.distance, rides.time);
-
-		return totalFare;
+		return new InvoiceSummary(ride.length, (int) totalFare);
 	}
 }
