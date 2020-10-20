@@ -18,4 +18,13 @@ public class CabInvoiceTest {
 		double fare = invoiceService.calculateFare(0.5, 3);
 		Assert.assertEquals(8, fare, 0.0);
 	}
+
+	@Test
+	public void givenDistanceAndTimeForMultipleRides_ShouldReturnCorrectTotalFare() {
+		CabInvoice invoiceService = new CabInvoice();
+		Ride[] ride = { new Ride(2.0, 5), new Ride(0.1, 1) };
+
+		double fare = invoiceService.calculateFare(ride);
+		Assert.assertEquals(30, fare, 0.0);
+	}
 }
