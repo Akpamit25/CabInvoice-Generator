@@ -11,4 +11,12 @@ public class CabInvoice {
 			return COST_MIN;
 		return fare;
 	}
+
+	public double calculateFare(Ride[] ride) {
+		double totalFare = 0;
+		for (Ride rides : ride)
+			totalFare += this.calculateFare(rides.distance, rides.time);
+
+		return totalFare;
+	}
 }
